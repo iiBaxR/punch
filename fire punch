@@ -262,6 +262,10 @@ function firstattack()
 						Humanoid.PlatformStand = true
 						local fall = newPart(Vector3.new(1,1,1)," ", 1, false, workspace, "Plastic")
 					    fall.CanCollide = true; newWeld(hrp, fall); fall.Weld.C1 = CFrame.new(0,2,0)
+						task.spawn(function()
+							task.wait(1.8)
+							fall:Destroy()
+							end)
 						task.wait(2)
 						Humanoid.PlatformStand = false
 						fall:Destroy()
@@ -318,6 +322,10 @@ function firstattack1()
 						Humanoid.PlatformStand = true
 						local fall = newPart(Vector3.new(1,1,1)," ", 1, false, workspace, "Plastic")
 					    fall.CanCollide = true; newWeld(hrp, fall); fall.Weld.C1 = CFrame.new(0,2,0)
+						task.spawn(function()
+							task.wait(1.8)
+							fall:Destroy()
+							end)
 						task.wait(2)
 						Humanoid.PlatformStand = false
 						fall:Destroy()
@@ -373,9 +381,12 @@ function uppercat()
 							Humanoid.PlatformStand = true
 							local fall = newPart(Vector3.new(1,1,1)," ", 1, false, workspace, "Plastic")
 							fall.CanCollide = true; newWeld(hrp, fall); fall.Weld.C1 = CFrame.new(0,2,0)
+							    task.spawn(function()
+							    task.wait(1.8)
+							    fall:Destroy()
+							    end)
 							task.wait(2)
 							Humanoid.PlatformStand = false
-							fall:Destroy()
 						end)
 				
 					end
