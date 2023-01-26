@@ -1,4 +1,4 @@
---// attack animation
+--// fucking testing
 
 ------<<|| Defining/Variables |>>------
 local char = owner.Character
@@ -361,7 +361,7 @@ function uppercat()
 	end
 	task.spawn(function()
 		local succ, fail = pcall(function()
-			dash(RootPart,cfn(0,20,0),0.2)
+			dash(RootPart,CFrame.new(0,20,0),0.2)
 			local Params = RaycastParams.new()
 			Params.FilterType = Enum.RaycastFilterType.Blacklist
 			Params.FilterDescendantsInstances = {char}
