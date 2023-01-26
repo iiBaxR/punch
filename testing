@@ -348,6 +348,7 @@ function firstattack1()
 	end
 	attack = false
 end
+
 function uppercat()
 	for i = 1, 2,0.04 do
 		task.wait()
@@ -359,7 +360,7 @@ function uppercat()
 		LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1,-0.2)*cfa(rad(-3),rad(30),rad(-5)), 0.4)
 	end
 	task.spawn(function()
-		dash(RootPart,cfn(0,20,0),0.2)
+		--dash(RootPart,cfn(0,20,0),0.2)
 		local succ, fail = pcall(function()
 			local Params = RaycastParams.new()
 			Params.FilterType = Enum.RaycastFilterType.Blacklist
