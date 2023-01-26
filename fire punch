@@ -1,4 +1,4 @@
---// attack animation
+--// actual script
 
 ------<<|| Defining/Variables |>>------
 local char = owner.Character
@@ -6,7 +6,6 @@ local Debris = game:GetService("Debris")
 local TweenService = game:GetService("TweenService")
 local anim = "idle"
 local attack = false
-local combo = 0
 script.Parent = char
 
 local Head = char["Head"]
@@ -20,29 +19,6 @@ local RootPart = char["HumanoidRootPart"]
 local cfn, cfa, v3n, rad, cos, sin, random = CFrame.new, CFrame.Angles, Vector3.new, math.rad, math.cos, math.sin, math.random
 
 ------<<|| SHORTCUT FUNCTIONS ||>>-------
-
-
-
-function Swait(NUMBER)
-	if NUMBER == 0 or NUMBER == nil then
-		ArtificialHB.Event:wait()
-	else
-		for i = 1, NUMBER do
-			ArtificialHB.Event:wait()
-		end
-	end
-end
-
-function Swait(NUMBER)
-	if NUMBER == 0 or NUMBER == nil then
-		ArtificialHB.Event:wait()
-	else
-		for i = 1, NUMBER do
-			ArtificialHB.Event:wait()
-		end
-	end
-end
-
 
 function newWeld(part0, part1)
 	local weld = Instance.new("Weld", part1)
@@ -129,25 +105,25 @@ function ray(pos, dir, range, ignoring)
 end
 
 function dash(parent,cframes,wait)
-		local BodyPosition = Instance.new("BodyPosition")
-		BodyPosition.Parent = parent
-		BodyPosition.maxForce = Vector3.new(math.huge,math.huge,math.huge)
-		BodyPosition.Position = RootPart.CFrame*cframes.p
-		task.wait(wait)
-		BodyPosition:Destroy()
-	return dash 
+	local BodyPosition = Instance.new("BodyPosition")
+	BodyPosition.Parent = parent
+	BodyPosition.maxForce = Vector3.new(math.huge,math.huge,math.huge)
+	BodyPosition.Position = RootPart.CFrame*cframes.p
+	task.wait(wait)
+	BodyPosition:Destroy()
+return dash 
 end
 
 function push(parent,distance,wait)
-        local bv = Instance.new("BodyVelocity")
-        bv.maxForce = Vector3.new(math.huge, math.huge, math.huge)
-        bv.velocity = CFrame.new(RootPart.Position, parent.Position).lookVector * distance
-        bv.Parent = parent
-        game:GetService("Debris"):AddItem(bv, wait)
-	return push
+	local bv = Instance.new("BodyVelocity")
+	bv.maxForce = Vector3.new(math.huge, math.huge, math.huge)
+	bv.velocity = CFrame.new(RootPart.Position, parent.Position).lookVector * distance
+	bv.Parent = parent
+	game:GetService("Debris"):AddItem(bv, wait)
+return push
 end
-------<<||  N  L  S  ||>>----------
 
+---|| END
 
 
 if not LeftArm:FindFirstChild("Weld") then 
@@ -174,6 +150,110 @@ RightArm.Weld.C1 = cfn(0, 0.5, 0)
 LeftLeg.Weld.C1 = cfn(0, 1, 0)
 RightLeg.Weld.C1 = cfn(0, 1, 0)
 Torso.Weld.C1 = cfn(0, -1, 0)
+
+----//gloves
+
+local main = newPart(v3n(1,1,1), " ", 0, false, script, "Metal")
+newWeld(LeftArm, main); main.Weld.C1 = cfn(0,0.65,0)*cfa(0,rad(0),0); main.Parent = workspace
+main.Color = Color3.fromRGB(0,0,0)
+local mainmesh = newMesh(v3n(1.093, 0.962, 1.121),main,Enum.MeshType.FileMesh)
+mainmesh.MeshId = "rbxassetid://12132210526"
+
+local vains = newPart(v3n(1,1,1), " ", 0, false, script, "Neon")
+newWeld(LeftArm, vains); vains.Weld.C1 = cfn(0,-0.1,0)*cfa(0,rad(0),0); vains.Parent = workspace
+local vainsmesh = newMesh(v3n(1.022, 1.252, 1.031),vains,Enum.MeshType.FileMesh); vainsmesh.TextureId = "rbxassetid://0"
+vainsmesh.MeshId = "rbxassetid://12132211554"
+vainsmesh.VertexColor = v3n(5,1.5,0)
+
+local details = newPart(v3n(1,1,1), " ", 0, false, script, "Metal"); details.Parent = workspace
+newWeld(LeftArm, details); details.Weld.C1 = cfn(0,0.75,0)*cfa(0,rad(0),0)
+details.Color = Color3.fromRGB(165, 66, 0)
+details.Weld.C1 = cfn(0,0.75,0)*cfa(0,rad(0),0)
+local detailmesh = newMesh(v3n(1.129, 1, 1.171),details,Enum.MeshType.FileMesh)
+detailmesh.MeshId = "rbxassetid://12132210718"
+
+
+local gems = newPart(v3n(1,2,1), " ", 0, false, script, "Neon"); gems.Parent = workspace
+newWeld(main, gems); gems.Weld.C1 = cfn(0.576,0.15,0)*cfa(0,rad(0),0)
+local gemmesh = newMesh(v3n(1, 1, 0.955), gems, Enum.MeshType.FileMesh); gemmesh.TextureId = "rbxassetid://0"
+gemmesh.MeshId = "rbxassetid://12132210847"
+gemmesh.VertexColor = v3n(5,1.5,0)
+
+
+local cables = newPart(v3n(1,2,1), " ", 0, false, script, "Neon"); cables.Parent = workspace
+newWeld(main, cables); cables.Weld.C1 = cfn(-0.2,-0.1,0)*cfa(0,rad(0),0)
+local cablemesh = newMesh(v3n(1.1, 0.812, 1), cables, Enum.MeshType.FileMesh); cablemesh.TextureId = "rbxassetid://0"
+cablemesh.MeshId = "rbxassetid://12132211277"
+cablemesh.VertexColor = v3n(5,1.5,0)
+
+local details1 = newPart(v3n(1,2,1), " ", 0, false, script, "Metal"); details.Parent = workspace
+newWeld(main, details1); details1.Weld.C1 = cfn(0.6,-0.05,0)*cfa(0,rad(0),0)
+details1.Color = Color3.fromRGB(255, 170, 0)
+local detailmesh1 = newMesh(v3n(0.166, 1, 1.1), details1, Enum.MeshType.FileMesh)
+detailmesh1.MeshId = "rbxassetid://12132210992"
+
+local inside = newPart(v3n(0.2,0.1,0.1), " ", 0, false, script, "Neon"); inside.Parent = workspace
+newWeld(LeftArm, inside); inside.Weld.C1 = cfn(0,0.85,0)*cfa(0,rad(0),0)
+local insidemesh = newMesh(v3n(1.1,0.2,1.1),inside,Enum.MeshType.FileMesh); insidemesh.TextureId = "rbxassetid://0"
+insidemesh.MeshId = "rbxassetid://12178628573"
+insidemesh.VertexColor = v3n(5,1.5,0)
+
+-----------------------------------------------------//
+
+local main1 = newPart(v3n(1,1,1), " ", 0, false, script, "Metal"); main1.Parent = workspace
+newWeld(RightArm, main1); main1.Weld.C1 = cfn(0,0.65,0)*cfa(0,rad(180),0)
+main1.Color = Color3.fromRGB(0,0,0)
+local mainmesh1 = newMesh(v3n(1.093, 0.962, 1.121),main1,Enum.MeshType.FileMesh)
+mainmesh1.MeshId = "rbxassetid://12132210526"
+mainmesh1.VertexColor = v3n(0,0,0)
+
+local vains1 = newPart(v3n(1,0,1), " ", 0, false, script, "Neon"); vains1.Parent = workspace
+newWeld(RightArm, vains1); vains1.Weld.C1 = cfn(0,-0.1,0)*cfa(0,rad(0),0)
+local vainsmesh1 = newMesh(v3n(1.022, 1.252, 1.031),vains1,Enum.MeshType.FileMesh); vainsmesh1.TextureId = "rbxassetid://0"
+vainsmesh1.MeshId = "rbxassetid://12132211554"
+vainsmesh1.VertexColor = v3n(5,1.5,0)
+
+local details2 = newPart(v3n(1,1,1), " ", 0, false, script, "Metal"); details2.Parent = workspace
+newWeld(RightArm, details2); details2.Weld.C1 = cfn(0,0.75,0)*cfa(0,rad(180),0)
+details2.Color = Color3.fromRGB(165, 66, 0)
+local detailmesh2 = newMesh(v3n(1.129, 1, 1.171),details2,Enum.MeshType.FileMesh)
+detailmesh2.MeshId = "rbxassetid://12132210718"
+
+local gems1 = newPart(v3n(1,2,1), " ", 0, false, script, "Neon"); gems1.Parent = workspace
+newWeld(main1, gems1); gems1.Weld.C1 = cfn(0.576,0.15,0)*cfa(0,rad(0),0)
+local gemmesh1 = newMesh(v3n(1, 1, 0.955), gems1, Enum.MeshType.FileMesh); gemmesh1.TextureId = "rbxassetid://0"
+gemmesh1.MeshId = "rbxassetid://12132210847"
+gemmesh1.VertexColor = v3n(5,1.5,0)
+
+local cables1 = newPart(v3n(1,2,1), " ", 0, false, script, "Neon"); cables1.Parent = workspace
+newWeld(main1, cables1); cables1.Weld.C1 = cfn(-0.2,-0.1,0)*cfa(0,rad(0),0)
+local cablemesh1 = newMesh(v3n(1.1, 0.812, 1), cables1, Enum.MeshType.FileMesh); cablemesh1.TextureId = "rbxassetid://0"
+cablemesh1.MeshId = "rbxassetid://12132211277"
+cablemesh1.VertexColor = v3n(5,1.5,0)
+
+local details22 = newPart(v3n(1,2,1), " ", 0, false, script, "Metal"); details22.Parent = workspace
+newWeld(main1, details22); details22.Weld.C1 = cfn(0.6,-0.05,0)*cfa(0,rad(0),0)
+details22.Color = Color3.fromRGB(255, 170, 0)
+local detailmesh22 = newMesh(v3n(0.166, 1, 1.1), details22, Enum.MeshType.FileMesh)
+detailmesh22.MeshId = "rbxassetid://12132210992"
+
+local inside1 = newPart(v3n(0.2,0.1,0.1), " ", 0, false, script, "Neon"); inside1.Parent = workspace
+newWeld(RightArm, inside1); inside1.Weld.C1 = cfn(0,0.85,0)*cfa(0,rad(0),0)
+local insidemesh1 = newMesh(v3n(1.1,0.2,1.1),inside1,Enum.MeshType.FileMesh); insidemesh1.TextureId = "rbxassetid://0"
+insidemesh1.MeshId = "rbxassetid://12178628573"
+insidemesh1.VertexColor = v3n(5,1.5,0)
+
+----<<||   E F F E C T S   ||>>----
+
+local lavaright = newParticle(RightArm,50,NumberRange.new(0.5,0.5),"rbxassetid://7145697379",ColorSequenceKeypoint.new(0, Color3.new(1, 0.5, 0)),ColorSequenceKeypoint.new(1, Color3.new(1, 0, 0)),NumberSequenceKeypoint.new(0, 0), NumberSequenceKeypoint.new(0.1, 0), NumberSequenceKeypoint.new(0.5, 0.25), NumberSequenceKeypoint.new(1, 1),NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(0.06, 0.125),NumberSequenceKeypoint.new(1, 0),Enum.NormalId.Top,NumberRange.new(4, 4),Vector2.new(-50, 50))
+local lavaright2 = newParticle(RightArm,50,NumberRange.new(0.5,0.5),"rbxassetid://7145697379",ColorSequenceKeypoint.new(0, Color3.new(1, 0.5, 0)),ColorSequenceKeypoint.new(1, Color3.new(1, 0, 0)),NumberSequenceKeypoint.new(0, 0), NumberSequenceKeypoint.new(0.1, 0), NumberSequenceKeypoint.new(0.5, 0.25), NumberSequenceKeypoint.new(1, 1),NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(0.06, 0.125),NumberSequenceKeypoint.new(1, 0),Enum.NormalId.Top,NumberRange.new(4, 4),Vector2.new(-50, 50))
+local lavaright3 = newParticle(RightArm,50,NumberRange.new(0.5,0.5),"rbxassetid://7145697379",ColorSequenceKeypoint.new(0, Color3.new(1, 0.5, 0)),ColorSequenceKeypoint.new(1, Color3.new(1, 0, 0)),NumberSequenceKeypoint.new(0, 0), NumberSequenceKeypoint.new(0.1, 0), NumberSequenceKeypoint.new(0.5, 0.25), NumberSequenceKeypoint.new(1, 1),NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(0.06, 0.125),NumberSequenceKeypoint.new(1, 0),Enum.NormalId.Top,NumberRange.new(4, 4),Vector2.new(-50, 50))
+
+local lavaleft = newParticle(LeftArm,50,NumberRange.new(0.5,0.5),"rbxassetid://7145697379",ColorSequenceKeypoint.new(0, Color3.new(1, 0.5, 0)),ColorSequenceKeypoint.new(1, Color3.new(1, 0, 0)),NumberSequenceKeypoint.new(0, 0), NumberSequenceKeypoint.new(0.1, 0), NumberSequenceKeypoint.new(0.5, 0.25), NumberSequenceKeypoint.new(1, 1),NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(0.06, 0.125),NumberSequenceKeypoint.new(1, 0),Enum.NormalId.Top,NumberRange.new(4, 4),Vector2.new(-50, 50))
+local lavaleft2 = newParticle(LeftArm,50,NumberRange.new(0.5,0.5),"rbxassetid://7145697379",ColorSequenceKeypoint.new(0, Color3.new(1, 0.5, 0)),ColorSequenceKeypoint.new(1, Color3.new(1, 0, 0)),NumberSequenceKeypoint.new(0, 0), NumberSequenceKeypoint.new(0.1, 0), NumberSequenceKeypoint.new(0.5, 0.25), NumberSequenceKeypoint.new(1, 1),NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(0.06, 0.125),NumberSequenceKeypoint.new(1, 0),Enum.NormalId.Top,NumberRange.new(4, 4),Vector2.new(-50, 50))
+local lavaleft3 = newParticle(LeftArm,50,NumberRange.new(0.5,0.5),"rbxassetid://7145697379",ColorSequenceKeypoint.new(0, Color3.new(1, 0.5, 0)),ColorSequenceKeypoint.new(1, Color3.new(1, 0, 0)),NumberSequenceKeypoint.new(0, 0), NumberSequenceKeypoint.new(0.1, 0), NumberSequenceKeypoint.new(0.5, 0.25), NumberSequenceKeypoint.new(1, 1),NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(0.06, 0.125),NumberSequenceKeypoint.new(1, 0),Enum.NormalId.Top,NumberRange.new(4, 4),Vector2.new(-50, 50))
+
+-----<<||   A T T A C K S   ||>>------
 
 
 local Remote = Instance.new("RemoteEvent",script)
@@ -258,14 +338,16 @@ function firstattack()
 				if Humanoid then
 					Humanoid:TakeDamage(25)
 					push(hed, 30, 0.05)
+
 					task.spawn(function()
-						local impact = newPart(Vector3.new(1,2,1), " ", 0, true, script, "Neon"); impact.Parent = script
+						local impact = newPart(Vector3.new(1,2,1), " ", 0, true, script, "Neon"); impact.Parent = workspace
 						local impactme = newMesh(Vector3.new(0.1,0.1,0.1), impact, Enum.MeshType.FileMesh); impactme.TextureId = "rbxassetid://0"
 						impactme.MeshId = "rbxassetid://881809484"
 						impactme.VertexColor = Vector3.new(5,1.5,0)
-					
+					    impact.CFrame = hrp.CFrame
+
 						local info = TweenInfo.new(0.7, Enum.EasingStyle.Linear, Enum.EasingDirection.In, 0, false, 0)
-					
+						
 						local scalee = TweenService:Create(impactme, info, {Scale = Vector3.new(6,6,6)}); local transparency = TweenService:Create(impact, info, {Transparency = 1})
 						scalee:Play(); transparency:Play()
 						
@@ -273,6 +355,8 @@ function firstattack()
 						task.wait()
 					local firee = newPart(Vector3.new(0.5,0.5,0.5), "fire", 0, true, char, "Neon"); firee.Color = Color3.fromRGB(165, 66, 0)
 					local mfiree = newMesh(Vector3.new(1.5,1.5,1.5), firee, "Sphere")
+					firee.CFrame = hrp.CFrame
+					firee.Parent = workspace
 					
 					local move = TweenService:Create(firee, info, {CFrame = hrp.CFrame * CFrame.new(math.random(-5,5),math.random(-5,5),math.random(-5,5))});local transparency1 = TweenService:Create(firee, info, {Transparency = 1})
 					local shrink = TweenService:Create(mfiree, info, {Scale = Vector3.new(0.4,0.4,0.4)})
@@ -281,6 +365,7 @@ function firstattack()
 					end
 					Debris:AddItem(impact, 2)
 					end)
+
 					task.spawn(function()
 						Humanoid.PlatformStand = true
 						local fall = newPart(Vector3.new(1,1,1)," ", 1, false, workspace, "Plastic")
@@ -342,13 +427,14 @@ function firstattack1()
 					push(hed, 30, 0.05)
 					
 					task.spawn(function()
-						local impact = newPart(Vector3.new(1,2,1), " ", 0, true, script, "Neon"); impact.Parent = script
+						local impact = newPart(Vector3.new(1,2,1), " ", 0, true, script, "Neon"); impact.Parent = workspace
 						local impactme = newMesh(Vector3.new(0.1,0.1,0.1), impact, Enum.MeshType.FileMesh); impactme.TextureId = "rbxassetid://0"
 						impactme.MeshId = "rbxassetid://881809484"
 						impactme.VertexColor = Vector3.new(5,1.5,0)
-					
+					    impact.CFrame = hrp.CFrame
+
 						local info = TweenInfo.new(0.7, Enum.EasingStyle.Linear, Enum.EasingDirection.In, 0, false, 0)
-					
+						
 						local scalee = TweenService:Create(impactme, info, {Scale = Vector3.new(6,6,6)}); local transparency = TweenService:Create(impact, info, {Transparency = 1})
 						scalee:Play(); transparency:Play()
 						
@@ -356,6 +442,8 @@ function firstattack1()
 						task.wait()
 					local firee = newPart(Vector3.new(0.5,0.5,0.5), "fire", 0, true, char, "Neon"); firee.Color = Color3.fromRGB(165, 66, 0)
 					local mfiree = newMesh(Vector3.new(1.5,1.5,1.5), firee, "Sphere")
+					firee.CFrame = hrp.CFrame
+					firee.Parent = workspace
 					
 					local move = TweenService:Create(firee, info, {CFrame = hrp.CFrame * CFrame.new(math.random(-5,5),math.random(-5,5),math.random(-5,5))});local transparency1 = TweenService:Create(firee, info, {Transparency = 1})
 					local shrink = TweenService:Create(mfiree, info, {Scale = Vector3.new(0.4,0.4,0.4)})
@@ -426,13 +514,14 @@ function uppercat()
 					dash(hed,CFrame.new(0,20,0),0.2)
 
 					task.spawn(function()
-						local impact = newPart(Vector3.new(1,2,1), " ", 0, true, script, "Neon"); impact.Parent = script
+						local impact = newPart(Vector3.new(1,2,1), " ", 0, true, script, "Neon"); impact.Parent = workspace
 						local impactme = newMesh(Vector3.new(0.1,0.1,0.1), impact, Enum.MeshType.FileMesh); impactme.TextureId = "rbxassetid://0"
 						impactme.MeshId = "rbxassetid://881809484"
 						impactme.VertexColor = Vector3.new(5,1.5,0)
-					
+					    impact.CFrame = hrp.CFrame
+
 						local info = TweenInfo.new(0.7, Enum.EasingStyle.Linear, Enum.EasingDirection.In, 0, false, 0)
-					
+						
 						local scalee = TweenService:Create(impactme, info, {Scale = Vector3.new(6,6,6)}); local transparency = TweenService:Create(impact, info, {Transparency = 1})
 						scalee:Play(); transparency:Play()
 						
@@ -440,6 +529,8 @@ function uppercat()
 						task.wait()
 					local firee = newPart(Vector3.new(0.5,0.5,0.5), "fire", 0, true, char, "Neon"); firee.Color = Color3.fromRGB(165, 66, 0)
 					local mfiree = newMesh(Vector3.new(1.5,1.5,1.5), firee, "Sphere")
+					firee.CFrame = hrp.CFrame
+					firee.Parent = workspace
 					
 					local move = TweenService:Create(firee, info, {CFrame = hrp.CFrame * CFrame.new(math.random(-5,5),math.random(-5,5),math.random(-5,5))});local transparency1 = TweenService:Create(firee, info, {Transparency = 1})
 					local shrink = TweenService:Create(mfiree, info, {Scale = Vector3.new(0.4,0.4,0.4)})
@@ -448,6 +539,7 @@ function uppercat()
 					end
 					Debris:AddItem(impact, 2)
 					end)
+
 					task.spawn(function()
 						Humanoid.PlatformStand = true
 						local fall = newPart(Vector3.new(1,1,1)," ", 1, false, workspace, "Plastic")
@@ -497,63 +589,65 @@ Mouse.KeyDown:connect(function(k)
 end)
 
 
+
 game:GetService('RunService').Heartbeat:connect(function()
 	local notfloor = ray(RootPart.Position, (cfn(RootPart.Position, RootPart.Position + v3n(0, -1, 0))).lookVector, 5, char)
 	local velwalk = (RootPart.Velocity*v3n(1, 0, 1)).magnitude
 	local veljump = RootPart.Velocity.y
-	local currentFrame = cfn(char.HumanoidRootPart.Position*v3n(1,0,1),(char.HumanoidRootPart.Position+char.HumanoidRootPart.CFrame.LookVector)*v3n(1,0,1))
-	one = char.Humanoid.MoveDirection * currentFrame.LookVector
-	two = char.Humanoid.MoveDirection * currentFrame.RightVector
-	forbac = one.X+one.Z
-	sidway = two.X+two.Z
-	if not attack then
-		if velwalk >= 1 and notfloor ~= nil then
-			anim = "walk"
-			char.Humanoid.WalkSpeed = 16
+    local currentFrame = cfn(char.HumanoidRootPart.Position*v3n(1,0,1),(char.HumanoidRootPart.Position+char.HumanoidRootPart.CFrame.LookVector)*v3n(1,0,1))
+	local clock = os.clock()
+    one = char.Humanoid.MoveDirection * currentFrame.LookVector
+    two = char.Humanoid.MoveDirection * currentFrame.RightVector
+    forbac = one.X+one.Z
+    sidway = two.X+two.Z
+    if not attack then
+        if velwalk >= 1 and notfloor ~= nil then
+            anim = "walk"
+            char.Humanoid.WalkSpeed = 16
+    
+        elseif velwalk < 1 and notfloor ~= nil then
+            anim = "idle"
+            char.Humanoid.WalkSpeed = 16
+    
+        elseif veljump > 1 and notfloor == nil then
+            anim = "jump"
+            char.Humanoid.WalkSpeed = 16
+    
+        elseif veljump < -1 and notfloor == nil then
+            anim = "fall"
+            char.Humanoid.WalkSpeed = 16
+        end
+        if anim == "idle" then
+            Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0)*cfa(rad(-5+3*sin(clock*2)),rad(40),0), 0.2)
+            Torso.Weld.C0 = Torso.Weld.C0:Lerp( cfn(0,-1+0.1*cos(clock*2),0)*cfa(rad(0),rad(-40),rad(0)), 0.2)
+            RightArm.Weld.C0 = RightArm.Weld.C0:Lerp( cfn(1.3,0+0.1*sin(clock*2),-0.5)*cfa(rad(130+5*sin(clock*2)),rad(0),rad(-30)), 0.2)
+            LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.3,0+0.1*sin(clock*2),0)*cfa(rad(115+5*sin(clock*2)),rad(-10),rad(0)), 0.2)
+            RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-1-0.1*cos(clock*2),-0.1)*cfa(rad(0),rad(-10),rad(5)), 0.2)
+            LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1-0.1*cos(clock*2),-0.2)*cfa(rad(-3),rad(30),rad(-5)), 0.2)
 
-		elseif velwalk < 1 and notfloor ~= nil then
-			anim = "idle"
-			char.Humanoid.WalkSpeed = 16
+        elseif anim == "walk" then
+            Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0)*cfa(forbac*0.2,rad(0-10*cos(clock*10))-sidway*0.7,0), 0.08)
+            Torso.Weld.C0 = Torso.Weld.C0:Lerp( cfn(0,-1+.15*cos(clock*20),0)*cfa(-forbac*0.2+0.1*cos(clock*20),rad(0+10*cos(clock*10)),-sidway*0.2), 0.08)
+            RightArm.Weld.C0 = RightArm.Weld.C0:Lerp( cfn(1.5,0.4,0)*cfa(rad(0)+forbac*2*cos(clock*10),rad(0),rad(0)-forbac*0.75*cos(clock*10)), 0.08)
+            LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.5,0.4,0)*cfa(rad(0)-forbac*2*cos(clock*10),rad(0),rad(0)-forbac*0.75*cos(clock*10)), 0.08)
+            RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-1+0.5*sin(clock*10),0)*cfa(-forbac*1.8*cos(clock*10),rad(0),-sidway*1.3*cos(clock*10)), 0.08)
+            LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1-0.5*sin(clock*10),0)*cfa(forbac*1.8*cos(clock*10),rad(0),sidway*1.3*cos(clock*10)), 0.08)
 
-		elseif veljump > 1 and notfloor == nil then
-			anim = "jump"
-			char.Humanoid.WalkSpeed = 16
+        elseif anim == "jump" then
+            Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0)*cfa(rad(10),rad(0),0), 0.08)
+            Torso.Weld.C0 = Torso.Weld.C0:Lerp( cfn(0,-1,0)*cfa(rad(10),rad(0),rad(0)), 0.08)
+            RightArm.Weld.C0 = RightArm.Weld.C0:Lerp( cfn(1.5,0.5,0)*cfa(rad(0),rad(-20),rad(40)), 0.08)
+            LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.5,0.5,0)*cfa(rad(0),rad(20),rad(-40)), 0.08)
+            RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-0.3,-0.5)*cfa(rad(-20),rad(-10),rad(0)), 0.08)
+            LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1,0)*cfa(rad(-2),rad(20),rad(0)), 0.08)
 
-		elseif veljump < -1 and notfloor == nil then
-			anim = "fall"
-			char.Humanoid.WalkSpeed = 16
-		end
-		if anim == "idle" then
-			Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0)*cfa(rad(-5+3*sin(os.clock()*2)),rad(40),0), 0.2)
-			Torso.Weld.C0 = Torso.Weld.C0:Lerp( cfn(0,-1+0.1*cos(os.clock()*2),0)*cfa(rad(0),rad(-40),rad(0)), 0.2)
-			RightArm.Weld.C0 = RightArm.Weld.C0:Lerp( cfn(1.3,0+0.1*sin(os.clock()*2),-0.5)*cfa(rad(130+5*sin(os.clock()*2)),rad(0),rad(-30)), 0.2)
-			LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.3,0+0.1*sin(os.clock()*2),0)*cfa(rad(115+5*sin(os.clock()*2)),rad(-10),rad(0)), 0.2)
-			RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-1-0.1*cos(os.clock()*2),-0.1)*cfa(rad(0),rad(-10),rad(5)), 0.2)
-			LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1-0.1*cos(os.clock()*2),-0.2)*cfa(rad(-3),rad(30),rad(-5)), 0.2)
-
-		elseif anim == "walk" then
-			Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0)*cfa(forbac*0.2,rad(0-10*cos(os.clock()*10))-sidway*0.7,0), 0.08)
-			Torso.Weld.C0 = Torso.Weld.C0:Lerp( cfn(0,-1+.15*cos(os.clock()*20),0)*cfa(-forbac*0.2+0.1*cos(os.clock()*20),rad(0+10*cos(os.clock()*10)),-sidway*0.2), 0.08)
-			RightArm.Weld.C0 = RightArm.Weld.C0:Lerp( cfn(1.5,0.4,0)*cfa(rad(0)+forbac*2*cos(os.clock()*10),rad(0),rad(0)-forbac*0.75*cos(os.clock()*10)), 0.08)
-			LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.5,0.4,0)*cfa(rad(0)-forbac*2*cos(os.clock()*10),rad(0),rad(0)-forbac*0.75*cos(os.clock()*10)), 0.08)
-			RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-1+0.5*sin(os.clock()*10),0)*cfa(-forbac*1.8*cos(os.clock()*10),rad(0),-sidway*1.3*cos(os.clock()*10)), 0.08)
-			LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1-0.5*sin(os.clock()*10),0)*cfa(forbac*1.8*cos(os.clock()*10),rad(0),sidway*1.3*cos(os.clock()*10)), 0.08)
-
-		elseif anim == "jump" then
-			Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0)*cfa(rad(10),rad(0),0), 0.08)
-			Torso.Weld.C0 = Torso.Weld.C0:Lerp( cfn(0,-1,0)*cfa(rad(10),rad(0),rad(0)), 0.08)
-			RightArm.Weld.C0 = RightArm.Weld.C0:Lerp( cfn(1.5,0.5,0)*cfa(rad(0),rad(-20),rad(40)), 0.08)
-			LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.5,0.5,0)*cfa(rad(0),rad(20),rad(-40)), 0.08)
-			RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-0.3,-0.5)*cfa(rad(-20),rad(-10),rad(0)), 0.08)
-			LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1,0)*cfa(rad(-2),rad(20),rad(0)), 0.08)
-
-		elseif anim == "fall" then
-			Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0)*cfa(rad(-20),rad(0),0), 0.2)
-			Torso.Weld.C0 = Torso.Weld.C0:Lerp( cfn(0,-1,0)*cfa(rad(-10),rad(0),rad(0)), 0.2)
-			RightArm.Weld.C0 = RightArm.Weld.C0:Lerp( cfn(1.5,0.5,0)*cfa(rad(0),rad(-40),rad(60)), 0.2)
-			LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.5,0.5,0)*cfa(rad(0),rad(40),rad(-60)), 0.2)
-			RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-0.1,-0.5)*cfa(rad(-20),rad(-10),rad(0)), 0.08)
-			LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1,0)*cfa(rad(10),rad(20),rad(0)), 0.2)
-		end
-	end
+        elseif anim == "fall" then
+            Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0)*cfa(rad(-20),rad(0),0), 0.2)
+            Torso.Weld.C0 = Torso.Weld.C0:Lerp( cfn(0,-1,0)*cfa(rad(-10),rad(0),rad(0)), 0.2)
+            RightArm.Weld.C0 = RightArm.Weld.C0:Lerp( cfn(1.5,0.5,0)*cfa(rad(0),rad(-40),rad(60)), 0.2)
+            LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.5,0.5,0)*cfa(rad(0),rad(40),rad(-60)), 0.2)
+            RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-0.1,-0.5)*cfa(rad(-20),rad(-10),rad(0)), 0.08)
+            LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1,0)*cfa(rad(10),rad(20),rad(0)), 0.2)
+        end
+    end
 end)
