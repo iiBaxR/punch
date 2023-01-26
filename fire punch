@@ -239,7 +239,7 @@ function firstattack()
 
 	end
     task.spawn(function()
-		dash(RootPart, cfn(0,0,-7), 0.2)
+		dash(RootPart, CFrame.new(0,0,-7), 0.2)
 		local succ, fail = pcall(function()
 			local Params = RaycastParams.new()
 			Params.FilterType = Enum.RaycastFilterType.Blacklist
@@ -297,7 +297,6 @@ function firstattack1()
 		LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.5,0.25,0)*cfa(rad(110),rad(-40),rad(10)), 0.2)
 		RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-1,-0.1)*cfa(rad(0),rad(-10),rad(5)), 0.2)
 		LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1,-0.2)*cfa(rad(-3),rad(30),rad(-5)), 0.2)
-
 	end
 	task.spawn(function()
 		dash(RootPart, CFrame.new(0,0,-7), 0.2)
@@ -360,43 +359,42 @@ function uppercat()
 		LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1,-0.2)*cfa(rad(-3),rad(30),rad(-5)), 0.4)
 	end
 	task.spawn(function()
-		dash(RootPart,CFrame.new(0,20,0),0.2)
-			local succ, fail = pcall(function()
-				local Params = RaycastParams.new()
-				Params.FilterType = Enum.RaycastFilterType.Blacklist
-				Params.FilterDescendantsInstances = {char}
-				Params.RespectCanCollide = false
-	
-				local Origin = RootPart.Position
-				local Direction = RootPart.CFrame.LookVector * 7
-				local rayCast = workspace:Raycast(Origin, Direction, Params)
-	
-				if rayCast and rayCast.Instance:FindFirstAncestorOfClass("Model") then
-					local rcharacter = rayCast.Instance:FindFirstAncestorOfClass("Model")
-					local Humanoid = rcharacter:FindFirstChildOfClass("Humanoid")
-					local hrp = rcharacter.HumanoidRootPart
-					local toroso = rcharacter.HumanoidRootPart
-					local hed = rcharacter.Head
-					if Humanoid then
-						Humanoid:TakeDamage(25)
-						dash(hed,cfn(0,20,0),0.2)
-						
+		local succ, fail = pcall(function()
+			dash(RootPart,CFrame.new(0,20,0),0.2)
+			local Params = RaycastParams.new()
+			Params.FilterType = Enum.RaycastFilterType.Blacklist
+			Params.FilterDescendantsInstances = {char}
+			Params.RespectCanCollide = false
+
+			local Origin = RootPart.Position
+			local Direction = RootPart.CFrame.LookVector * 7
+			local rayCast = workspace:Raycast(Origin, Direction, Params)
+
+			if rayCast and rayCast.Instance:FindFirstAncestorOfClass("Model") then
+                local rcharacter = rayCast.Instance:FindFirstAncestorOfClass("Model")
+				local Humanoid = rcharacter:FindFirstChildOfClass("Humanoid")
+				local hrp = rcharacter.HumanoidRootPart
+				local hed = rcharacter.Head
+				if Humanoid then
+					Humanoid:TakeDamage(10)
+					dash(hed,CFrame.new(0,20,0),0.2)
+					task.spawn(function()
+						Humanoid.PlatformStand = true
+						local fall = newPart(Vector3.new(1,1,1)," ", 1, false, workspace, "Plastic")
+					    fall.CanCollide = true; newWeld(hrp, fall); fall.Weld.C1 = CFrame.new(0,2,0)
 						task.spawn(function()
-							Humanoid.PlatformStand = true
-							local fall = newPart(v3n(1,1,1)," ", 1, false, workspace, "Plastic")
-							fall.CanCollide = true; newWeld(hrp, fall); fall.Weld.C1 = cfn(0,2,0)
-							    task.spawn(function()
-							    task.wait(1.8)
-							    fall:Destroy()
-							    end)
-							task.wait(2)
-							Humanoid.PlatformStand = false
-						end)
-				
-					end
+							task.wait(1.8)
+							fall:Destroy()
+							end)
+						task.wait(2)
+						Humanoid.PlatformStand = false
+						fall:Destroy()
+					end)
+			
 				end
-			end)
+            end
 		end)
+	end)
 	for i = 1, 2,0.035 do
 		task.wait()
 		Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0.2)*cfa(rad(20),rad(-70),0), 0.6)
