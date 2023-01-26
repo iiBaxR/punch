@@ -1,4 +1,4 @@
---// actual script
+--// attack animation
 
 ------<<|| Defining/Variables |>>------
 local char = owner.Character
@@ -6,6 +6,7 @@ local Debris = game:GetService("Debris")
 local TweenService = game:GetService("TweenService")
 local anim = "idle"
 local attack = false
+local combo = 0
 script.Parent = char
 
 local Head = char["Head"]
@@ -19,6 +20,29 @@ local RootPart = char["HumanoidRootPart"]
 local cfn, cfa, v3n, rad, cos, sin, random = CFrame.new, CFrame.Angles, Vector3.new, math.rad, math.cos, math.sin, math.random
 
 ------<<|| SHORTCUT FUNCTIONS ||>>-------
+
+
+
+function Swait(NUMBER)
+	if NUMBER == 0 or NUMBER == nil then
+		ArtificialHB.Event:wait()
+	else
+		for i = 1, NUMBER do
+			ArtificialHB.Event:wait()
+		end
+	end
+end
+
+function Swait(NUMBER)
+	if NUMBER == 0 or NUMBER == nil then
+		ArtificialHB.Event:wait()
+	else
+		for i = 1, NUMBER do
+			ArtificialHB.Event:wait()
+		end
+	end
+end
+
 
 function newWeld(part0, part1)
 	local weld = Instance.new("Weld", part1)
@@ -105,25 +129,25 @@ function ray(pos, dir, range, ignoring)
 end
 
 function dash(parent,cframes,wait)
-	local BodyPosition = Instance.new("BodyPosition")
-	BodyPosition.Parent = parent
-	BodyPosition.maxForce = Vector3.new(math.huge,math.huge,math.huge)
-	BodyPosition.Position = RootPart.CFrame*cframes.p
-	task.wait(wait)
-	BodyPosition:Destroy()
-return dash 
+		local BodyPosition = Instance.new("BodyPosition")
+		BodyPosition.Parent = parent
+		BodyPosition.maxForce = Vector3.new(math.huge,math.huge,math.huge)
+		BodyPosition.Position = RootPart.CFrame*cframes.p
+		task.wait(wait)
+		BodyPosition:Destroy()
+	return dash 
 end
 
 function push(parent,distance,wait)
-	local bv = Instance.new("BodyVelocity")
-	bv.maxForce = Vector3.new(math.huge, math.huge, math.huge)
-	bv.velocity = CFrame.new(RootPart.Position, parent.Position).lookVector * distance
-	bv.Parent = parent
-	game:GetService("Debris"):AddItem(bv, wait)
-return push
+        local bv = Instance.new("BodyVelocity")
+        bv.maxForce = Vector3.new(math.huge, math.huge, math.huge)
+        bv.velocity = CFrame.new(RootPart.Position, parent.Position).lookVector * distance
+        bv.Parent = parent
+        game:GetService("Debris"):AddItem(bv, wait)
+	return push
 end
+------<<||  N  L  S  ||>>----------
 
----|| END
 
 
 if not LeftArm:FindFirstChild("Weld") then 
@@ -151,7 +175,8 @@ LeftLeg.Weld.C1 = cfn(0, 1, 0)
 RightLeg.Weld.C1 = cfn(0, 1, 0)
 Torso.Weld.C1 = cfn(0, -1, 0)
 
-----//gloves
+
+---------<<||  G L O V E S  ||>>----------
 
 local main = newPart(v3n(1,1,1), " ", 0, false, script, "Metal")
 newWeld(LeftArm, main); main.Weld.C1 = cfn(0,0.65,0)*cfa(0,rad(0),0); main.Parent = workspace
@@ -589,65 +614,63 @@ Mouse.KeyDown:connect(function(k)
 end)
 
 
-
 game:GetService('RunService').Heartbeat:connect(function()
 	local notfloor = ray(RootPart.Position, (cfn(RootPart.Position, RootPart.Position + v3n(0, -1, 0))).lookVector, 5, char)
 	local velwalk = (RootPart.Velocity*v3n(1, 0, 1)).magnitude
 	local veljump = RootPart.Velocity.y
-    local currentFrame = cfn(char.HumanoidRootPart.Position*v3n(1,0,1),(char.HumanoidRootPart.Position+char.HumanoidRootPart.CFrame.LookVector)*v3n(1,0,1))
-	local clock = os.clock()
-    one = char.Humanoid.MoveDirection * currentFrame.LookVector
-    two = char.Humanoid.MoveDirection * currentFrame.RightVector
-    forbac = one.X+one.Z
-    sidway = two.X+two.Z
-    if not attack then
-        if velwalk >= 1 and notfloor ~= nil then
-            anim = "walk"
-            char.Humanoid.WalkSpeed = 16
-    
-        elseif velwalk < 1 and notfloor ~= nil then
-            anim = "idle"
-            char.Humanoid.WalkSpeed = 16
-    
-        elseif veljump > 1 and notfloor == nil then
-            anim = "jump"
-            char.Humanoid.WalkSpeed = 16
-    
-        elseif veljump < -1 and notfloor == nil then
-            anim = "fall"
-            char.Humanoid.WalkSpeed = 16
-        end
-        if anim == "idle" then
-            Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0)*cfa(rad(-5+3*sin(clock*2)),rad(40),0), 0.2)
-            Torso.Weld.C0 = Torso.Weld.C0:Lerp( cfn(0,-1+0.1*cos(clock*2),0)*cfa(rad(0),rad(-40),rad(0)), 0.2)
-            RightArm.Weld.C0 = RightArm.Weld.C0:Lerp( cfn(1.3,0+0.1*sin(clock*2),-0.5)*cfa(rad(130+5*sin(clock*2)),rad(0),rad(-30)), 0.2)
-            LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.3,0+0.1*sin(clock*2),0)*cfa(rad(115+5*sin(clock*2)),rad(-10),rad(0)), 0.2)
-            RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-1-0.1*cos(clock*2),-0.1)*cfa(rad(0),rad(-10),rad(5)), 0.2)
-            LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1-0.1*cos(clock*2),-0.2)*cfa(rad(-3),rad(30),rad(-5)), 0.2)
+	local currentFrame = cfn(char.HumanoidRootPart.Position*v3n(1,0,1),(char.HumanoidRootPart.Position+char.HumanoidRootPart.CFrame.LookVector)*v3n(1,0,1))
+	one = char.Humanoid.MoveDirection * currentFrame.LookVector
+	two = char.Humanoid.MoveDirection * currentFrame.RightVector
+	forbac = one.X+one.Z
+	sidway = two.X+two.Z
+	if not attack then
+		if velwalk >= 1 and notfloor ~= nil then
+			anim = "walk"
+			char.Humanoid.WalkSpeed = 16
 
-        elseif anim == "walk" then
-            Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0)*cfa(forbac*0.2,rad(0-10*cos(clock*10))-sidway*0.7,0), 0.08)
-            Torso.Weld.C0 = Torso.Weld.C0:Lerp( cfn(0,-1+.15*cos(clock*20),0)*cfa(-forbac*0.2+0.1*cos(clock*20),rad(0+10*cos(clock*10)),-sidway*0.2), 0.08)
-            RightArm.Weld.C0 = RightArm.Weld.C0:Lerp( cfn(1.5,0.4,0)*cfa(rad(0)+forbac*2*cos(clock*10),rad(0),rad(0)-forbac*0.75*cos(clock*10)), 0.08)
-            LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.5,0.4,0)*cfa(rad(0)-forbac*2*cos(clock*10),rad(0),rad(0)-forbac*0.75*cos(clock*10)), 0.08)
-            RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-1+0.5*sin(clock*10),0)*cfa(-forbac*1.8*cos(clock*10),rad(0),-sidway*1.3*cos(clock*10)), 0.08)
-            LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1-0.5*sin(clock*10),0)*cfa(forbac*1.8*cos(clock*10),rad(0),sidway*1.3*cos(clock*10)), 0.08)
+		elseif velwalk < 1 and notfloor ~= nil then
+			anim = "idle"
+			char.Humanoid.WalkSpeed = 16
 
-        elseif anim == "jump" then
-            Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0)*cfa(rad(10),rad(0),0), 0.08)
-            Torso.Weld.C0 = Torso.Weld.C0:Lerp( cfn(0,-1,0)*cfa(rad(10),rad(0),rad(0)), 0.08)
-            RightArm.Weld.C0 = RightArm.Weld.C0:Lerp( cfn(1.5,0.5,0)*cfa(rad(0),rad(-20),rad(40)), 0.08)
-            LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.5,0.5,0)*cfa(rad(0),rad(20),rad(-40)), 0.08)
-            RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-0.3,-0.5)*cfa(rad(-20),rad(-10),rad(0)), 0.08)
-            LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1,0)*cfa(rad(-2),rad(20),rad(0)), 0.08)
+		elseif veljump > 1 and notfloor == nil then
+			anim = "jump"
+			char.Humanoid.WalkSpeed = 16
 
-        elseif anim == "fall" then
-            Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0)*cfa(rad(-20),rad(0),0), 0.2)
-            Torso.Weld.C0 = Torso.Weld.C0:Lerp( cfn(0,-1,0)*cfa(rad(-10),rad(0),rad(0)), 0.2)
-            RightArm.Weld.C0 = RightArm.Weld.C0:Lerp( cfn(1.5,0.5,0)*cfa(rad(0),rad(-40),rad(60)), 0.2)
-            LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.5,0.5,0)*cfa(rad(0),rad(40),rad(-60)), 0.2)
-            RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-0.1,-0.5)*cfa(rad(-20),rad(-10),rad(0)), 0.08)
-            LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1,0)*cfa(rad(10),rad(20),rad(0)), 0.2)
-        end
-    end
+		elseif veljump < -1 and notfloor == nil then
+			anim = "fall"
+			char.Humanoid.WalkSpeed = 16
+		end
+		if anim == "idle" then
+			Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0)*cfa(rad(-5+3*sin(os.clock()*2)),rad(40),0), 0.2)
+			Torso.Weld.C0 = Torso.Weld.C0:Lerp( cfn(0,-1+0.1*cos(os.clock()*2),0)*cfa(rad(0),rad(-40),rad(0)), 0.2)
+			RightArm.Weld.C0 = RightArm.Weld.C0:Lerp( cfn(1.3,0+0.1*sin(os.clock()*2),-0.5)*cfa(rad(130+5*sin(os.clock()*2)),rad(0),rad(-30)), 0.2)
+			LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.3,0+0.1*sin(os.clock()*2),0)*cfa(rad(115+5*sin(os.clock()*2)),rad(-10),rad(0)), 0.2)
+			RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-1-0.1*cos(os.clock()*2),-0.1)*cfa(rad(0),rad(-10),rad(5)), 0.2)
+			LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1-0.1*cos(os.clock()*2),-0.2)*cfa(rad(-3),rad(30),rad(-5)), 0.2)
+
+		elseif anim == "walk" then
+			Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0)*cfa(forbac*0.2,rad(0-10*cos(os.clock()*10))-sidway*0.7,0), 0.08)
+			Torso.Weld.C0 = Torso.Weld.C0:Lerp( cfn(0,-1+.15*cos(os.clock()*20),0)*cfa(-forbac*0.2+0.1*cos(os.clock()*20),rad(0+10*cos(os.clock()*10)),-sidway*0.2), 0.08)
+			RightArm.Weld.C0 = RightArm.Weld.C0:Lerp( cfn(1.5,0.4,0)*cfa(rad(0)+forbac*2*cos(os.clock()*10),rad(0),rad(0)-forbac*0.75*cos(os.clock()*10)), 0.08)
+			LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.5,0.4,0)*cfa(rad(0)-forbac*2*cos(os.clock()*10),rad(0),rad(0)-forbac*0.75*cos(os.clock()*10)), 0.08)
+			RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-1+0.5*sin(os.clock()*10),0)*cfa(-forbac*1.8*cos(os.clock()*10),rad(0),-sidway*1.3*cos(os.clock()*10)), 0.08)
+			LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1-0.5*sin(os.clock()*10),0)*cfa(forbac*1.8*cos(os.clock()*10),rad(0),sidway*1.3*cos(os.clock()*10)), 0.08)
+
+		elseif anim == "jump" then
+			Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0)*cfa(rad(10),rad(0),0), 0.08)
+			Torso.Weld.C0 = Torso.Weld.C0:Lerp( cfn(0,-1,0)*cfa(rad(10),rad(0),rad(0)), 0.08)
+			RightArm.Weld.C0 = RightArm.Weld.C0:Lerp( cfn(1.5,0.5,0)*cfa(rad(0),rad(-20),rad(40)), 0.08)
+			LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.5,0.5,0)*cfa(rad(0),rad(20),rad(-40)), 0.08)
+			RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-0.3,-0.5)*cfa(rad(-20),rad(-10),rad(0)), 0.08)
+			LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1,0)*cfa(rad(-2),rad(20),rad(0)), 0.08)
+
+		elseif anim == "fall" then
+			Head.Weld.C0 = Head.Weld.C0:Lerp( cfn(0,1.5,0)*cfa(rad(-20),rad(0),0), 0.2)
+			Torso.Weld.C0 = Torso.Weld.C0:Lerp( cfn(0,-1,0)*cfa(rad(-10),rad(0),rad(0)), 0.2)
+			RightArm.Weld.C0 = RightArm.Weld.C0:Lerp( cfn(1.5,0.5,0)*cfa(rad(0),rad(-40),rad(60)), 0.2)
+			LeftArm.Weld.C0 = LeftArm.Weld.C0:Lerp( cfn(-1.5,0.5,0)*cfa(rad(0),rad(40),rad(-60)), 0.2)
+			RightLeg.Weld.C0 = RightLeg.Weld.C0:Lerp( cfn(0.5,-0.1,-0.5)*cfa(rad(-20),rad(-10),rad(0)), 0.08)
+			LeftLeg.Weld.C0 = LeftLeg.Weld.C0:Lerp( cfn(-0.5,-1,0)*cfa(rad(10),rad(20),rad(0)), 0.2)
+		end
+	end
 end)
