@@ -258,7 +258,29 @@ function firstattack()
 				if Humanoid then
 					Humanoid:TakeDamage(25)
 					push(hed, 30, 0.05)
+					task.spawn(function()
+						local impact = newPart(Vector3.new(1,2,1), " ", 0, true, script, "Neon"); impact.Parent = script
+						local impactme = newMesh(Vector3.new(0.1,0.1,0.1), impact, Enum.MeshType.FileMesh); impactme.TextureId = "rbxassetid://0"
+						impactme.MeshId = "rbxassetid://881809484"
+						impactme.VertexColor = Vector3.new(5,1.5,0)
 					
+						local info = TweenInfo.new(0.7, Enum.EasingStyle.Linear, Enum.EasingDirection.In, 0, false, 0)
+					
+						local scalee = TweenService:Create(impactme, info, {Scale = Vector3.new(6,6,6)}); local transparency = TweenService:Create(impact, info, {Transparency = 1})
+						scalee:Play(); transparency:Play()
+						
+					for i = 0,10 do 
+						task.wait()
+					local firee = newPart(Vector3.new(0.5,0.5,0.5), "fire", 0, true, char, "Neon"); firee.Color = Color3.fromRGB(165, 66, 0)
+					local mfiree = newMesh(Vector3.new(1.5,1.5,1.5), firee, "Sphere")
+					
+					local move = TweenService:Create(firee, info, {CFrame = hrp.CFrame * CFrame.new(math.random(-5,5),math.random(-5,5),math.random(-5,5))});local transparency1 = TweenService:Create(firee, info, {Transparency = 1})
+					local shrink = TweenService:Create(mfiree, info, {Scale = Vector3.new(0.4,0.4,0.4)})
+					move:Play(); transparency1:Play(); shrink:Play()
+					Debris:AddItem(firee, 2)
+					end
+					Debris:AddItem(impact, 2)
+					end)
 					task.spawn(function()
 						Humanoid.PlatformStand = true
 						local fall = newPart(Vector3.new(1,1,1)," ", 1, false, workspace, "Plastic")
@@ -320,6 +342,30 @@ function firstattack1()
 					push(hed, 30, 0.05)
 					
 					task.spawn(function()
+						local impact = newPart(Vector3.new(1,2,1), " ", 0, true, script, "Neon"); impact.Parent = script
+						local impactme = newMesh(Vector3.new(0.1,0.1,0.1), impact, Enum.MeshType.FileMesh); impactme.TextureId = "rbxassetid://0"
+						impactme.MeshId = "rbxassetid://881809484"
+						impactme.VertexColor = Vector3.new(5,1.5,0)
+					
+						local info = TweenInfo.new(0.7, Enum.EasingStyle.Linear, Enum.EasingDirection.In, 0, false, 0)
+					
+						local scalee = TweenService:Create(impactme, info, {Scale = Vector3.new(6,6,6)}); local transparency = TweenService:Create(impact, info, {Transparency = 1})
+						scalee:Play(); transparency:Play()
+						
+					for i = 0,10 do 
+						task.wait()
+					local firee = newPart(Vector3.new(0.5,0.5,0.5), "fire", 0, true, char, "Neon"); firee.Color = Color3.fromRGB(165, 66, 0)
+					local mfiree = newMesh(Vector3.new(1.5,1.5,1.5), firee, "Sphere")
+					
+					local move = TweenService:Create(firee, info, {CFrame = hrp.CFrame * CFrame.new(math.random(-5,5),math.random(-5,5),math.random(-5,5))});local transparency1 = TweenService:Create(firee, info, {Transparency = 1})
+					local shrink = TweenService:Create(mfiree, info, {Scale = Vector3.new(0.4,0.4,0.4)})
+					move:Play(); transparency1:Play(); shrink:Play()
+					Debris:AddItem(firee, 2)
+					end
+					Debris:AddItem(impact, 2)
+					end)
+
+					task.spawn(function()
 						Humanoid.PlatformStand = true
 						local fall = newPart(Vector3.new(1,1,1)," ", 1, false, workspace, "Plastic")
 					    fall.CanCollide = true; newWeld(hrp, fall); fall.Weld.C1 = CFrame.new(0,2,0)
@@ -378,6 +424,30 @@ function uppercat()
 				if Humanoid then
 					Humanoid:TakeDamage(10)
 					dash(hed,CFrame.new(0,20,0),0.2)
+
+					task.spawn(function()
+						local impact = newPart(Vector3.new(1,2,1), " ", 0, true, script, "Neon"); impact.Parent = script
+						local impactme = newMesh(Vector3.new(0.1,0.1,0.1), impact, Enum.MeshType.FileMesh); impactme.TextureId = "rbxassetid://0"
+						impactme.MeshId = "rbxassetid://881809484"
+						impactme.VertexColor = Vector3.new(5,1.5,0)
+					
+						local info = TweenInfo.new(0.7, Enum.EasingStyle.Linear, Enum.EasingDirection.In, 0, false, 0)
+					
+						local scalee = TweenService:Create(impactme, info, {Scale = Vector3.new(6,6,6)}); local transparency = TweenService:Create(impact, info, {Transparency = 1})
+						scalee:Play(); transparency:Play()
+						
+					for i = 0,10 do 
+						task.wait()
+					local firee = newPart(Vector3.new(0.5,0.5,0.5), "fire", 0, true, char, "Neon"); firee.Color = Color3.fromRGB(165, 66, 0)
+					local mfiree = newMesh(Vector3.new(1.5,1.5,1.5), firee, "Sphere")
+					
+					local move = TweenService:Create(firee, info, {CFrame = hrp.CFrame * CFrame.new(math.random(-5,5),math.random(-5,5),math.random(-5,5))});local transparency1 = TweenService:Create(firee, info, {Transparency = 1})
+					local shrink = TweenService:Create(mfiree, info, {Scale = Vector3.new(0.4,0.4,0.4)})
+					move:Play(); transparency1:Play(); shrink:Play()
+					Debris:AddItem(firee, 2)
+					end
+					Debris:AddItem(impact, 2)
+					end)
 					task.spawn(function()
 						Humanoid.PlatformStand = true
 						local fall = newPart(Vector3.new(1,1,1)," ", 1, false, workspace, "Plastic")
